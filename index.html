@@ -7,398 +7,116 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   :root {
-    --rose: #c97a7a;
-    --rose-light: #f5e6e6;
-    --rose-dark: #8a4a4a;
-    --cream: #fdf8f2;
-    --warm: #f9f0e3;
-    --gold: #c4a265;
-    --gold-light: #f0e4cc;
-    --text: #3a2a2a;
-    --text-muted: #7a6060;
-    --border: #e8d5c0;
-    --white: #ffffff;
-    --shadow: rgba(140, 80, 80, 0.12);
+    --rose: #c97a7a; --rose-light: #f5e6e6; --rose-dark: #8a4a4a;
+    --cream: #fdf8f2; --warm: #f9f0e3; --gold: #c4a265; --gold-light: #f0e4cc;
+    --text: #3a2a2a; --text-muted: #7a6060; --border: #e8d5c0;
+    --white: #ffffff; --shadow: rgba(140,80,80,0.12); --navy: #1a3a6e;
   }
+  body { font-family:'Lato',sans-serif; background:var(--cream); color:var(--text); min-height:100vh;
+    background-image: radial-gradient(ellipse at 10% 0%,rgba(201,122,122,.08) 0%,transparent 50%),
+                      radial-gradient(ellipse at 90% 100%,rgba(196,162,101,.08) 0%,transparent 50%); }
 
-  body {
-    font-family: 'Lato', sans-serif;
-    background: var(--cream);
-    color: var(--text);
-    min-height: 100vh;
-    background-image:
-      radial-gradient(ellipse at 10% 0%, rgba(201,122,122,0.08) 0%, transparent 50%),
-      radial-gradient(ellipse at 90% 100%, rgba(196,162,101,0.08) 0%, transparent 50%);
-  }
+  /* CONFIG BANNER */
+  #config-banner { background:#fff3cd; border:1.5px solid #f0c040; border-radius:12px; padding:18px 24px;
+    margin:24px auto; max-width:860px; font-size:13.5px; color:#6a4a00; line-height:1.7; }
+  #config-banner strong { font-weight:700; }
+  #config-banner code { background:#fde68a; border-radius:4px; padding:1px 6px; font-family:monospace; font-size:12px; }
+  #config-banner.hidden { display:none; }
 
-  header {
-    text-align: center;
-    padding: 52px 24px 36px;
-    position: relative;
-  }
+  /* STATUS BAR */
+  #status-bar { text-align:center; font-size:12px; padding:6px 24px; font-weight:700; letter-spacing:1px; }
+  #status-bar.ok   { color:#0F6E56; }
+  #status-bar.err  { color:#993C1D; }
+  #status-bar.load { color:#7a6060; }
 
-  .header-deco {
-    font-size: 28px;
-    letter-spacing: 14px;
-    color: var(--rose);
-    opacity: 0.5;
-    margin-bottom: 12px;
-    display: block;
-  }
+  header { text-align:center; padding:40px 24px 32px; }
+  .header-deco { font-size:24px; letter-spacing:12px; color:var(--rose); opacity:.5; margin-bottom:10px; display:block; }
+  header h1 { font-family:'Playfair Display',serif; font-size:clamp(26px,5vw,40px); font-weight:600; color:var(--rose-dark); line-height:1.2; }
+  header p  { margin-top:10px; font-size:15px; color:var(--text-muted); font-weight:300; max-width:520px; margin-inline:auto; line-height:1.7; }
+  .divider  { display:flex; align-items:center; gap:14px; max-width:320px; margin:20px auto 0; color:var(--gold); opacity:.6; }
+  .divider::before,.divider::after { content:''; flex:1; height:1px; background:var(--gold); opacity:.5; }
+  .divider span { font-size:16px; }
 
-  header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 5vw, 42px);
-    font-weight: 600;
-    color: var(--rose-dark);
-    line-height: 1.2;
-  }
-
-  header p {
-    margin-top: 10px;
-    font-size: 15px;
-    color: var(--text-muted);
-    font-weight: 300;
-    max-width: 520px;
-    margin-inline: auto;
-    line-height: 1.7;
-  }
-
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    max-width: 320px;
-    margin: 24px auto 0;
-    color: var(--gold);
-    opacity: 0.6;
-  }
-
-  .divider::before, .divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--gold);
-    opacity: 0.5;
-  }
-
-  .divider span { font-size: 16px; }
-
-  main {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 0 20px 60px;
-  }
-
-  /* STEP CARD */
-  .step-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 32px 36px;
-    margin-bottom: 28px;
-    box-shadow: 0 4px 24px var(--shadow);
-  }
-
-  .step-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--rose);
-    margin-bottom: 4px;
-    display: block;
-  }
-
-  .step-card h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--rose-dark);
-    margin-bottom: 20px;
-  }
-
-  /* INFO BOX */
-  .info-box {
-    background: var(--gold-light);
-    border-left: 3px solid var(--gold);
-    border-radius: 8px;
-    padding: 14px 18px;
-    font-size: 13.5px;
-    color: #6a4a20;
-    line-height: 1.65;
-    margin-bottom: 24px;
-  }
-
-  .info-box strong { font-weight: 700; }
-
-  .info-box ol {
-    margin: 8px 0 0 18px;
-  }
-
-  .info-box li { margin-bottom: 4px; }
-
-  /* FORM */
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 2fr auto;
-    gap: 12px;
-    align-items: end;
-  }
-
-  @media (max-width: 600px) {
-    .form-grid { grid-template-columns: 1fr; }
-    .step-card { padding: 24px 20px; }
-  }
-
-  .field { display: flex; flex-direction: column; gap: 6px; }
-  .field label { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); }
-  .field input {
-    height: 44px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 0 14px;
-    font-size: 14px;
-    font-family: 'Lato', sans-serif;
-    color: var(--text);
-    background: var(--warm);
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  .field input:focus {
-    border-color: var(--rose);
-    box-shadow: 0 0 0 3px rgba(201,122,122,0.15);
-  }
-  .field input::placeholder { color: #bfaaaa; }
-
-  .btn-add {
-    height: 44px;
-    padding: 0 24px;
-    background: var(--rose-dark);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 14px;
-    font-family: 'Lato', sans-serif;
-    font-weight: 700;
-    cursor: pointer;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-    transition: background 0.2s, transform 0.1s;
-  }
-  .btn-add:hover { background: #6d3232; }
-  .btn-add:active { transform: scale(0.97); }
-
-  /* ACTIONS BAR */
-  .actions-bar {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  .btn-secondary {
-    height: 38px;
-    padding: 0 18px;
-    background: transparent;
-    color: var(--rose-dark);
-    border: 1.5px solid var(--rose);
-    border-radius: 9px;
-    font-size: 13px;
-    font-family: 'Lato', sans-serif;
-    font-weight: 700;
-    cursor: pointer;
-    letter-spacing: 0.5px;
-    transition: all 0.2s;
-  }
-  .btn-secondary:hover { background: var(--rose-light); }
-
-  .count-badge {
-    margin-left: auto;
-    font-size: 13px;
-    color: var(--text-muted);
-  }
-
-  /* CARDS GRID */
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
-  }
-
-  .qr-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px 20px 20px;
-    text-align: center;
-    box-shadow: 0 3px 16px var(--shadow);
-    position: relative;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .qr-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 28px var(--shadow);
-  }
-
-  .card-number {
-    position: absolute;
-    top: 12px;
-    left: 14px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    color: var(--rose);
-    opacity: 0.6;
-    text-transform: uppercase;
-  }
-
-  .card-remove {
-    position: absolute;
-    top: 8px;
-    right: 10px;
-    width: 26px;
-    height: 26px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--border);
-    font-size: 18px;
-    line-height: 1;
-    border-radius: 50%;
-    transition: color 0.2s, background 0.2s;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .card-remove:hover { color: var(--rose-dark); background: var(--rose-light); }
-
-  .qr-wrap {
-    width: 160px;
-    height: 160px;
-    margin: 16px auto 14px;
-    background: var(--warm);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border: 1px solid var(--border);
-  }
-
-  .qr-wrap img {
-    width: 150px;
-    height: 150px;
-    display: block;
-  }
-
-  .qr-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 17px;
-    font-weight: 500;
-    color: var(--rose-dark);
-    margin-bottom: 6px;
-    word-break: break-word;
-  }
-
-  .qr-url {
-    font-size: 11px;
-    color: var(--text-muted);
-    word-break: break-all;
-    line-height: 1.5;
-    margin-bottom: 14px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .card-actions {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-  }
-
-  .btn-card {
-    flex: 1;
-    height: 32px;
-    font-size: 11.5px;
-    font-family: 'Lato', sans-serif;
-    font-weight: 700;
-    border-radius: 8px;
-    cursor: pointer;
-    letter-spacing: 0.3px;
-    transition: all 0.2s;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .btn-dl {
-    background: var(--rose-dark);
-    color: white;
-    border: none;
-  }
-  .btn-dl:hover { background: #6d3232; }
-
-  .btn-open {
-    background: transparent;
-    color: var(--rose-dark);
-    border: 1px solid var(--rose);
-  }
-  .btn-open:hover { background: var(--rose-light); }
-
-  /* EMPTY STATE */
-  .empty-state {
-    text-align: center;
-    padding: 48px 24px;
-    color: var(--text-muted);
-  }
-  .empty-icon { font-size: 36px; margin-bottom: 12px; opacity: 0.35; }
-  .empty-state p { font-size: 14px; font-style: italic; }
-
-  /* PRINT */
+  main { max-width:860px; margin:0 auto; padding:0 20px 60px; }
+  .step-card { background:var(--white); border:1px solid var(--border); border-radius:16px; padding:32px 36px; margin-bottom:28px; box-shadow:0 4px 24px var(--shadow); }
+  .step-label { font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--rose); margin-bottom:4px; display:block; }
+  .step-card h2 { font-family:'Playfair Display',serif; font-size:20px; font-weight:500; color:var(--rose-dark); margin-bottom:20px; }
+  .info-box { background:var(--gold-light); border-left:3px solid var(--gold); border-radius:8px; padding:14px 18px; font-size:13.5px; color:#6a4a20; line-height:1.65; margin-bottom:24px; }
+  .info-box strong { font-weight:700; } .info-box ol { margin:8px 0 0 18px; } .info-box li { margin-bottom:4px; }
+  .form-grid { display:grid; grid-template-columns:1fr 2fr auto; gap:12px; align-items:end; }
+  @media(max-width:600px){ .form-grid{grid-template-columns:1fr} .step-card{padding:24px 20px} }
+  .field { display:flex; flex-direction:column; gap:6px; }
+  .field label { font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--text-muted); }
+  .field input { height:44px; border:1px solid var(--border); border-radius:10px; padding:0 14px; font-size:14px; font-family:'Lato',sans-serif; color:var(--text); background:var(--warm); outline:none; transition:border-color .2s,box-shadow .2s; }
+  .field input:focus { border-color:var(--rose); box-shadow:0 0 0 3px rgba(201,122,122,.15); }
+  .field input::placeholder { color:#bfaaaa; }
+  .btn-add { height:44px; padding:0 24px; background:var(--rose-dark); color:white; border:none; border-radius:10px; font-size:14px; font-family:'Lato',sans-serif; font-weight:700; cursor:pointer; transition:background .2s,transform .1s; }
+  .btn-add:hover { background:#6d3232; } .btn-add:active { transform:scale(.97); }
+  .btn-add:disabled { background:#ccc; cursor:not-allowed; }
+  .actions-bar { display:flex; gap:12px; margin-bottom:24px; flex-wrap:wrap; align-items:center; }
+  .btn-secondary { height:38px; padding:0 18px; background:transparent; color:var(--rose-dark); border:1.5px solid var(--rose); border-radius:9px; font-size:13px; font-family:'Lato',sans-serif; font-weight:700; cursor:pointer; transition:all .2s; }
+  .btn-secondary:hover { background:var(--rose-light); }
+  .count-badge { margin-left:auto; font-size:13px; color:var(--text-muted); }
+  .cards-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:20px; }
+  .qr-card { background:var(--white); border:1px solid var(--border); border-radius:16px; padding:24px 20px 20px; text-align:center; box-shadow:0 3px 16px var(--shadow); position:relative; transition:transform .2s,box-shadow .2s; }
+  .qr-card:hover { transform:translateY(-3px); box-shadow:0 8px 28px var(--shadow); }
+  .card-number { position:absolute; top:12px; left:14px; font-size:10px; font-weight:700; letter-spacing:1.5px; color:var(--rose); opacity:.6; text-transform:uppercase; }
+  .card-remove { position:absolute; top:8px; right:10px; width:26px; height:26px; background:none; border:none; cursor:pointer; color:var(--border); font-size:18px; border-radius:50%; transition:color .2s,background .2s; display:flex; align-items:center; justify-content:center; }
+  .card-remove:hover { color:var(--rose-dark); background:var(--rose-light); }
+  .qr-wrap { width:160px; height:160px; margin:16px auto 14px; background:var(--warm); border-radius:10px; display:flex; align-items:center; justify-content:center; overflow:hidden; border:1px solid var(--border); padding:5px; }
+  .qr-name { font-family:'Playfair Display',serif; font-size:17px; font-weight:500; color:var(--rose-dark); margin-bottom:6px; word-break:break-word; }
+  .qr-url  { font-size:11px; color:var(--text-muted); word-break:break-all; line-height:1.5; margin-bottom:14px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .card-actions { display:flex; gap:8px; justify-content:center; }
+  .btn-card { flex:1; height:32px; font-size:11.5px; font-family:'Lato',sans-serif; font-weight:700; border-radius:8px; cursor:pointer; transition:all .2s; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; }
+  .btn-dl   { background:var(--rose-dark); color:white; border:none; } .btn-dl:hover { background:#6d3232; }
+  .btn-open { background:transparent; color:var(--rose-dark); border:1px solid var(--rose); } .btn-open:hover { background:var(--rose-light); }
+  .empty-state { text-align:center; padding:48px 24px; color:var(--text-muted); }
+  .empty-icon { font-size:36px; margin-bottom:12px; opacity:.35; }
+  .empty-state p { font-size:14px; font-style:italic; }
   @media print {
-    header, .step-card:first-of-type, .actions-bar, .card-remove, .card-actions { display: none !important; }
-    body { background: white; }
-    .step-card { box-shadow: none; border: none; }
-    .cards-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .qr-card { break-inside: avoid; border: 1px solid #ddd; box-shadow: none; }
-    .qr-card:hover { transform: none; }
+    header,.step-card:first-of-type,.actions-bar,.card-remove,.card-actions,#config-banner,#status-bar { display:none!important; }
+    body { background:white; } .step-card { box-shadow:none; border:none; }
+    .cards-grid { grid-template-columns:repeat(3,1fr); gap:12px; }
+    .qr-card { break-inside:avoid; border:1px solid #ddd; box-shadow:none; } .qr-card:hover { transform:none; }
   }
 </style>
 </head>
 <body>
 
+<!-- ══ AVISO DE CONFIGURAÇÃO (some automaticamente após configurar) ══ -->
+<div id="config-banner">
+  <strong>⚙️ Configure o Firebase antes de usar:</strong> Abra este arquivo em um editor de texto e localize o trecho
+  <code>COLE AQUI SUA CONFIG DO FIREBASE</code> no final da página. Substitua pelo objeto de configuração do seu projeto Firebase.
+  <br>Siga o guia em <a href="https://console.firebase.google.com" target="_blank" style="color:var(--navy)">console.firebase.google.com</a>:
+  criar projeto → Firestore Database → Configurações do projeto → SDK de apps Web.
+</div>
+
+<div id="status-bar" class="load">⏳ Conectando ao banco de dados…</div>
+
 <header>
-  </div>
-  <span style="display:block; font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--text-muted); margin-bottom:18px;">SESI — Serviço Social da Indústria</span>
+  <span style="display:block;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:18px;">SESI — Serviço Social da Indústria</span>
   <span class="header-deco">✦ ✦ ✦</span>
-  <h1>Homenagem às Mães<br><em style="font-weight:400; font-size:0.7em; color:var(--rose)">Gerador de QR Code</em></h1>
+  <h1>Homenagem às Mães<br><em style="font-weight:400;font-size:.7em;color:var(--rose)">Gerador de QR Code</em></h1>
   <p>Crie QR Codes personalizados para cada mãe assistir ao seu vídeo especial com apenas um toque.</p>
   <div class="divider"><span>✿</span></div>
 </header>
 
 <main>
-
-  <!-- STEP 1: Instructions -->
   <div class="step-card">
     <span class="step-label">Passo 1</span>
     <h2>Como preparar seus vídeos</h2>
     <div class="info-box">
       <strong>Importante:</strong> O QR Code armazena apenas um <em>link</em> — não o vídeo em si. Siga estes passos:
       <ol>
-        <li><strong>Google Drive:</strong> Faça upload do vídeo → Compartilhar → "Qualquer pessoa com o link" → Copie o link.</li>
-        <li><strong>YouTube:</strong> Faça upload como <em>Não listado</em> → Copie o link do vídeo.</li>
-        <li><strong>WhatsApp/Google Fotos:</strong> Compartilhe o vídeo e copie o link gerado.</li>
+        <li><strong>Google Drive:</strong> Fazer upload → Compartilhar → "Qualquer pessoa com o link" → Copiar o link.</li>
+        <li><strong>YouTube:</strong> Upload como <em>Não listado</em> → Copiar o link do vídeo.</li>
+        <li><strong>Google Fotos:</strong> Compartilhar → copiar o link gerado.</li>
       </ol>
       <br>Depois, cole o link no formulário abaixo e gere o QR Code de cada mãe.
     </div>
   </div>
 
-  <!-- STEP 2: Add entry -->
   <div class="step-card">
     <span class="step-label">Passo 2</span>
     <h2>Adicionar homenagem</h2>
@@ -411,80 +129,129 @@
         <label>Link do Vídeo</label>
         <input type="url" id="inp-url" placeholder="https://drive.google.com/..." />
       </div>
-      <button class="btn-add" onclick="addEntry()">+ Adicionar</button>
+      <button class="btn-add" id="btn-add" onclick="addEntry()" disabled>+ Adicionar</button>
     </div>
   </div>
 
-  <!-- STEP 3: Results -->
   <div class="step-card">
     <span class="step-label">Passo 3</span>
     <h2>QR Codes gerados</h2>
-
     <div class="actions-bar" id="actions-bar" style="display:none!important">
       <button class="btn-secondary" onclick="window.open('visualizacao.html','_blank')">👁 Página de exibição</button>
       <button class="btn-secondary" onclick="window.print()">🖨 Imprimir todos</button>
       <button class="btn-secondary" onclick="clearAll()">🗑 Limpar tudo</button>
       <span class="count-badge" id="count-badge"></span>
     </div>
-
     <div id="cards-container">
       <div class="empty-state">
         <div class="empty-icon">💐</div>
-        <p>Nenhuma homenagem adicionada ainda.<br>Preencha o formulário acima para começar.</p>
+        <p>Nenhuma homenagem adicionada ainda.</p>
       </div>
     </div>
   </div>
-
 </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script>
-  let entries = JSON.parse(localStorage.getItem('qr-maes') || '[]');
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp }                          from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, query, orderBy, writeBatch, getDocs }
+                                                    from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
-  function addEntry() {
+  // ══════════════════════════════════════════════════
+  //  COLE AQUI SUA CONFIG DO FIREBASE
+  //  (substitua todos os valores abaixo)
+  // ══════════════════════════════════════════════════
+  const firebaseConfig = {
+    apiKey:            "AIzaSyBPPakCZbA6yV7Pk0pqzOE8-l8YKREWfsA",
+    authDomain:        "gerar-qrcode-675c4.firebaseapp.com",
+    projectId:         "gerar-qrcode-675c4",
+    storageBucket:     "gerar-qrcode-675c4.firebasestorage.app",
+    messagingSenderId: "1015193087693",
+    appId:             "1:1015193087693:web:9b34f363314b109fdf0384"
+  };
+  // ══════════════════════════════════════════════════
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+  const col = collection(db, 'homenagens');
+
+  const statusBar    = document.getElementById('status-bar');
+  const btnAdd       = document.getElementById('btn-add');
+  const configBanner = document.getElementById('config-banner');
+
+  // Detecta se ainda é a config placeholder
+  if (false) {
+    statusBar.className = 'err';
+    statusBar.textContent = '⚠ Firebase não configurado — edite o arquivo e insira suas credenciais.';
+  } else {
+    configBanner.classList.add('hidden');
+  }
+
+  // Escuta mudanças em tempo real
+  const q = query(col, orderBy('criadoEm', 'asc'));
+  onSnapshot(q, (snapshot) => {
+    const entries = snapshot.docs.map(d => ({ firestoreId: d.id, ...d.data() }));
+    statusBar.className = 'ok';
+    statusBar.textContent = '✓ Conectado — sincronizando em tempo real';
+    btnAdd.disabled = false;
+    renderAll(entries);
+  }, (err) => {
+    statusBar.className = 'err';
+    statusBar.textContent = '✗ Erro de conexão: ' + err.message;
+  });
+
+  // Adicionar
+  window.addEntry = async function() {
     const name = document.getElementById('inp-name').value.trim();
     const url  = document.getElementById('inp-url').value.trim();
-    if (!name) { alert('Por favor, insira o nome da mae.'); return; }
-    if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
-      alert('Por favor, insira um link valido.'); return;
-    }
-    entries.push({ id: Date.now(), name, url });
-    save(); renderAll();
-    document.getElementById('inp-name').value = '';
-    document.getElementById('inp-url').value = '';
-    document.getElementById('inp-name').focus();
-  }
+    if (!name) { alert('Insira o nome da mãe.'); return; }
+    if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) { alert('Insira um link válido.'); return; }
+    btnAdd.disabled = true;
+    try {
+      await addDoc(col, { name, url, criadoEm: Date.now() });
+      document.getElementById('inp-name').value = '';
+      document.getElementById('inp-url').value  = '';
+      document.getElementById('inp-name').focus();
+    } catch(e) { alert('Erro ao salvar: ' + e.message); }
+    btnAdd.disabled = false;
+  };
 
-  function removeEntry(id) { entries = entries.filter(e => e.id !== id); save(); renderAll(); }
+  // Remover
+  window.removeEntry = async function(firestoreId) {
+    if (!confirm('Remover esta homenagem?')) return;
+    await deleteDoc(doc(db, 'homenagens', firestoreId));
+  };
 
-  function clearAll() {
-    if (confirm('Remover todos os QR Codes?')) { entries = []; save(); renderAll(); }
-  }
+  // Limpar tudo
+  window.clearAll = async function() {
+    if (!confirm('Remover TODOS os QR Codes? Isso não pode ser desfeito.')) return;
+    const snap = await getDocs(col);
+    const batch = writeBatch(db);
+    snap.docs.forEach(d => batch.delete(d.ref));
+    await batch.commit();
+  };
 
-  function save() { localStorage.setItem('qr-maes', JSON.stringify(entries)); }
-
-  function downloadQR(id) {
-    const wrap = document.getElementById('qr-c-' + id);
-    const canvas = wrap ? wrap.querySelector('canvas') : null;
-    if (!canvas) { alert('QR Code ainda nao gerado.'); return; }
-    const entry = entries.find(e => e.id === id);
+  // Download QR
+  window.downloadQR = function(id, name) {
+    const canvas = document.querySelector('#qr-c-' + id + ' canvas');
+    if (!canvas) { alert('QR Code ainda não gerado.'); return; }
     const link = document.createElement('a');
-    link.download = 'qrcode-' + entry.name.toLowerCase().replace(/[^a-z0-9]+/g,'-') + '.png';
+    link.download = 'qrcode-' + name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-') + '.png';
     link.href = canvas.toDataURL('image/png');
     link.click();
-  }
+  };
 
   function escHtml(s) {
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  function renderAll() {
-    const container = document.getElementById('cards-container');
+  function renderAll(entries) {
+    const container  = document.getElementById('cards-container');
     const actionsBar = document.getElementById('actions-bar');
-    const badge = document.getElementById('count-badge');
+    const badge      = document.getElementById('count-badge');
 
     if (entries.length === 0) {
-      container.innerHTML = '<div class="empty-state"><div class="empty-icon">&#128144;</div><p>Nenhuma homenagem adicionada ainda.<br>Preencha o formulario acima para comecar.</p></div>';
+      container.innerHTML = '<div class="empty-state"><div class="empty-icon">💐</div><p>Nenhuma homenagem adicionada ainda.<br>Preencha o formulário acima para começar.</p></div>';
       actionsBar.style.setProperty('display','none','important');
       return;
     }
@@ -492,49 +259,57 @@
     actionsBar.style.removeProperty('display');
     badge.textContent = entries.length + ' QR Code' + (entries.length > 1 ? 's' : '') + ' gerado' + (entries.length > 1 ? 's' : '');
 
-    const grid = document.createElement('div');
-    grid.className = 'cards-grid';
+    // Preserva QR codes já gerados (evita re-renderizar tudo)
+    const existing = {};
+    document.querySelectorAll('.qr-card[data-fid]').forEach(el => { existing[el.dataset.fid] = true; });
+    const newIds = new Set(entries.map(e => e.firestoreId));
 
-    entries.forEach(function(e, i) {
+    // Remove cards que sumiram
+    document.querySelectorAll('.qr-card[data-fid]').forEach(el => {
+      if (!newIds.has(el.dataset.fid)) el.remove();
+    });
+
+    // Cria/atualiza grid
+    let grid = document.getElementById('qr-main-grid');
+    if (!grid) { grid = document.createElement('div'); grid.id = 'qr-main-grid'; grid.className = 'cards-grid'; container.innerHTML = ''; container.appendChild(grid); }
+
+    entries.forEach((e, i) => {
+      const safeId = 'qr-c-' + e.firestoreId.replace(/[^a-zA-Z0-9]/g,'_');
+      if (existing[e.firestoreId]) {
+        const numEl = document.querySelector('[data-fid="' + e.firestoreId + '"] .card-number');
+        if (numEl) numEl.textContent = '#' + String(i+1).padStart(2,'0');
+        return;
+      }
       const card = document.createElement('div');
       card.className = 'qr-card';
+      card.dataset.fid = e.firestoreId;
       card.innerHTML =
         '<span class="card-number">#' + String(i+1).padStart(2,'0') + '</span>' +
-        '<button class="card-remove" onclick="removeEntry(' + e.id + ')" title="Remover">&#x2715;</button>' +
-        '<div class="qr-wrap" id="qr-c-' + e.id + '"></div>' +
+        '<button class="card-remove" onclick="removeEntry(\'' + e.firestoreId + '\')" title="Remover">&#x2715;</button>' +
+        '<div class="qr-wrap" id="' + safeId + '"></div>' +
         '<div class="qr-name">' + escHtml(e.name) + '</div>' +
         '<div class="qr-url">' + escHtml(e.url) + '</div>' +
         '<div class="card-actions">' +
-          '<button class="btn-card btn-dl" onclick="downloadQR(' + e.id + ')">&#x2B07; Baixar</button>' +
+          '<button class="btn-card btn-dl" onclick="downloadQR(\'' + safeId.replace('qr-c-','') + '\',\'' + escHtml(e.name) + '\')">&#x2B07; Baixar</button>' +
           '<a class="btn-card btn-open" href="' + escHtml(e.url) + '" target="_blank" rel="noopener">&#x25B6; Abrir</a>' +
         '</div>';
       grid.appendChild(card);
-    });
 
-    container.innerHTML = '';
-    container.appendChild(grid);
-
-    entries.forEach(function(e) {
-      const el = document.getElementById('qr-c-' + e.id);
-      if (el) {
-        new QRCode(el, {
-          text: e.url,
-          width: 150,
-          height: 150,
-          colorDark: '#1a3a6e',
-          colorLight: '#fdf8f2',
-          correctLevel: QRCode.CorrectLevel.H
-        });
-      }
+      // Gera QR
+      setTimeout(() => {
+        const el = document.getElementById(safeId);
+        if (el && !el.querySelector('canvas')) {
+          new QRCode(el, { text: e.url, width:150, height:150, colorDark:'#1a3a6e', colorLight:'#fdf8f2', correctLevel:QRCode.CorrectLevel.H });
+        }
+      }, 50);
     });
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('inp-url').addEventListener('keydown', function(e) { if (e.key === 'Enter') addEntry(); });
-    document.getElementById('inp-name').addEventListener('keydown', function(e) { if (e.key === 'Enter') document.getElementById('inp-url').focus(); });
-    renderAll();
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('inp-url').addEventListener('keydown',  e => { if(e.key==='Enter') addEntry(); });
+    document.getElementById('inp-name').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('inp-url').focus(); });
   });
 </script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </body>
 </html>
