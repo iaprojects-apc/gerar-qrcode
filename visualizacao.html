@@ -6,279 +6,64 @@
 <title>Homenagem às Mães — SESI</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
+  * { margin:0; padding:0; box-sizing:border-box; }
   :root {
-    --rose: #c97a7a;
-    --rose-light: #f5e6e6;
-    --rose-dark: #8a4a4a;
-    --rose-deep: #5c2e2e;
-    --cream: #fdf8f2;
-    --warm: #f9f0e3;
-    --gold: #c4a265;
-    --gold-light: #f0e4cc;
-    --text: #3a2a2a;
-    --text-muted: #7a6060;
-    --border: #e8d5c0;
-    --navy: #1a3a6e;
+    --rose:#c97a7a; --rose-light:#f5e6e6; --rose-dark:#8a4a4a; --rose-deep:#5c2e2e;
+    --cream:#fdf8f2; --warm:#f9f0e3; --gold:#c4a265; --gold-light:#f0e4cc;
+    --text:#3a2a2a; --text-muted:#7a6060; --border:#e8d5c0; --navy:#1a3a6e;
   }
+  body { font-family:'Lato',sans-serif; background:var(--cream); color:var(--text); min-height:100vh;
+    background-image: radial-gradient(ellipse at 15% 10%,rgba(201,122,122,.07) 0%,transparent 45%),
+                      radial-gradient(ellipse at 85% 90%,rgba(196,162,101,.07) 0%,transparent 45%); }
 
-  body {
-    font-family: 'Lato', sans-serif;
-    background: var(--cream);
-    color: var(--text);
-    min-height: 100vh;
-    background-image:
-      radial-gradient(ellipse at 15% 10%, rgba(201,122,122,0.07) 0%, transparent 45%),
-      radial-gradient(ellipse at 85% 90%, rgba(196,162,101,0.07) 0%, transparent 45%),
-      radial-gradient(ellipse at 50% 50%, rgba(201,122,122,0.03) 0%, transparent 70%);
-  }
+  #status-bar { text-align:center; font-size:12px; padding:6px 24px; font-weight:700; letter-spacing:1px; }
+  #status-bar.ok   { color:#0F6E56; } #status-bar.err { color:#993C1D; } #status-bar.load { color:#7a6060; }
 
-  /* ─── HEADER ─── */
-  header {
-    text-align: center;
-    padding: 56px 24px 44px;
-    position: relative;
-  }
+  header { text-align:center; padding:52px 24px 40px; }
+  .sesi-label { display:inline-block; font-size:10px; font-weight:700; letter-spacing:3.5px; text-transform:uppercase;
+    color:var(--text-muted); margin-bottom:20px; background:var(--warm); border:1px solid var(--border); border-radius:20px; padding:5px 16px; }
+  .petal-row { font-size:20px; letter-spacing:10px; color:var(--rose); opacity:.4; margin-bottom:14px; display:block; }
+  header h1  { font-family:'Playfair Display',serif; font-size:clamp(28px,6vw,50px); font-weight:500; color:var(--rose-deep); line-height:1.15; margin-bottom:6px; }
+  header h1 em { font-style:italic; color:var(--rose); font-weight:400; }
+  .subtitle  { font-size:15px; color:var(--text-muted); font-weight:300; margin-top:10px; }
+  .divider   { display:flex; align-items:center; gap:16px; max-width:280px; margin:26px auto 0; color:var(--gold); opacity:.55; font-size:15px; }
+  .divider::before,.divider::after { content:''; flex:1; height:1px; background:linear-gradient(to right,transparent,var(--gold),transparent); }
 
-  .sesi-label {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 3.5px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 20px;
-    background: var(--warm);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 5px 16px;
-  }
+  .scan-banner { max-width:560px; margin:0 auto 36px; padding:0 20px; text-align:center; }
+  .scan-pill { display:inline-flex; align-items:center; gap:10px; background:var(--navy); color:white; border-radius:40px; padding:12px 24px; font-size:14px; }
+  .scan-icon { width:28px; height:28px; background:rgba(255,255,255,.15); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
 
-  .petal-row {
-    font-size: 22px;
-    letter-spacing: 10px;
-    color: var(--rose);
-    opacity: 0.4;
-    margin-bottom: 14px;
-    display: block;
-  }
+  main { max-width:1100px; margin:0 auto; padding:0 24px 80px; }
+  .cards-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:24px; }
 
-  header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(30px, 6vw, 52px);
-    font-weight: 500;
-    color: var(--rose-deep);
-    line-height: 1.15;
-    margin-bottom: 6px;
-  }
-
-  header h1 em {
-    font-style: italic;
-    color: var(--rose);
-    font-weight: 400;
-  }
-
-  .subtitle {
-    font-size: 15px;
-    color: var(--text-muted);
-    font-weight: 300;
-    letter-spacing: 0.3px;
-    margin-top: 10px;
-  }
-
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    max-width: 280px;
-    margin: 28px auto 0;
-    color: var(--gold);
-    opacity: 0.55;
-    font-size: 15px;
-  }
-  .divider::before, .divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--gold), transparent);
-  }
-
-  /* ─── INSTRUCTION BANNER ─── */
-  .scan-banner {
-    max-width: 560px;
-    margin: 0 auto 40px;
-    padding: 0 20px;
-    text-align: center;
-  }
-
-  .scan-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--navy);
-    color: white;
-    border-radius: 40px;
-    padding: 12px 24px;
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 0.2px;
-  }
-
-  .scan-icon {
-    width: 28px;
-    height: 28px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    flex-shrink: 0;
-  }
-
-  /* ─── GRID ─── */
-  main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 24px 80px;
-  }
-
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 24px;
-  }
-
-  /* ─── CARD ─── */
-  .qr-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 28px 20px 22px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    box-shadow: 0 2px 12px rgba(140,80,80,0.08);
-  }
-
-  .qr-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--rose-light), var(--rose), var(--gold), var(--rose-light));
-    background-size: 200% 100%;
-    animation: shimmer 4s linear infinite;
-  }
-
-  @keyframes shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
-
-  .qr-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 36px rgba(140,80,80,0.14);
-  }
-
-  .card-number {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--border);
-    text-transform: uppercase;
-    margin-bottom: 4px;
-    display: block;
-  }
-
-  .qr-wrap {
-    width: 162px;
-    height: 162px;
-    margin: 10px auto 16px;
-    background: var(--cream);
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px;
-    overflow: hidden;
-  }
-
-  .qr-wrap canvas, .qr-wrap img { display: block; }
-
-  .card-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--rose-deep);
-    line-height: 1.3;
-    word-break: break-word;
-  }
-
-  .card-cta {
-    margin-top: 10px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--rose);
-    opacity: 0.7;
-  }
-
-  /* ─── EMPTY ─── */
-  .empty-state {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 72px 24px;
-    color: var(--text-muted);
-  }
-  .empty-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.3; display: block; }
-  .empty-state p {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-style: italic;
-    color: var(--rose);
-    opacity: 0.5;
-  }
-  .empty-state small {
-    display: block;
-    margin-top: 8px;
-    font-size: 13px;
-    font-family: 'Lato', sans-serif;
-    font-style: normal;
-    font-weight: 300;
-    color: var(--text-muted);
-  }
-
-  /* ─── FOOTER ─── */
-  footer {
-    text-align: center;
-    padding: 0 24px 40px;
-    font-size: 12px;
-    color: var(--border);
-    letter-spacing: 0.5px;
-  }
-
-  /* ─── PRINT ─── */
+  .qr-card { background:white; border:1px solid var(--border); border-radius:20px; padding:28px 20px 22px; text-align:center;
+    position:relative; overflow:hidden; transition:transform .25s,box-shadow .25s; box-shadow:0 2px 12px rgba(140,80,80,.08); }
+  .qr-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px;
+    background:linear-gradient(90deg,var(--rose-light),var(--rose),var(--gold),var(--rose-light)); background-size:200% 100%; animation:shimmer 4s linear infinite; }
+  @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+  .qr-card:hover { transform:translateY(-5px); box-shadow:0 12px 36px rgba(140,80,80,.14); }
+  .card-number { font-size:10px; font-weight:700; letter-spacing:2px; color:var(--border); text-transform:uppercase; margin-bottom:4px; display:block; }
+  .qr-wrap { width:162px; height:162px; margin:10px auto 16px; background:var(--cream); border-radius:12px; border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center; padding:6px; overflow:hidden; }
+  .qr-wrap canvas, .qr-wrap img { display:block; }
+  .card-name { font-family:'Playfair Display',serif; font-size:18px; font-weight:500; color:var(--rose-deep); line-height:1.3; word-break:break-word; }
+  .card-cta  { margin-top:10px; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--rose); opacity:.7; }
+  .empty-state { grid-column:1/-1; text-align:center; padding:72px 24px; }
+  .empty-icon { font-size:48px; margin-bottom:16px; opacity:.3; display:block; }
+  .empty-state p { font-family:'Playfair Display',serif; font-size:18px; font-style:italic; color:var(--rose); opacity:.5; }
+  .empty-state small { display:block; margin-top:8px; font-size:13px; font-family:'Lato',sans-serif; font-weight:300; color:var(--text-muted); }
+  footer { text-align:center; padding:0 24px 40px; font-size:12px; color:var(--border); letter-spacing:.5px; }
   @media print {
-    .scan-banner, footer { display: none; }
-    body { background: white; }
-    .qr-card { box-shadow: none; break-inside: avoid; border: 1px solid #ddd; }
-    .qr-card::before { display: none; }
-    .qr-card:hover { transform: none; }
-    .cards-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .scan-banner,footer,#status-bar { display:none; }
+    body { background:white; } .qr-card { box-shadow:none; break-inside:avoid; border:1px solid #ddd; } .qr-card::before { display:none; }
+    .cards-grid { grid-template-columns:repeat(3,1fr); gap:12px; }
   }
-
-  @media (max-width: 480px) {
-    .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .qr-wrap { width: 130px; height: 130px; }
-  }
+  @media(max-width:480px){ .cards-grid{grid-template-columns:repeat(2,1fr);gap:14px} .qr-wrap{width:130px;height:130px} }
 </style>
 </head>
 <body>
+
+<div id="status-bar" class="load">⏳ Conectando…</div>
 
 <header>
   <span class="sesi-label">SESI — Serviço Social da Indústria</span>
@@ -296,69 +81,73 @@
 </div>
 
 <main>
-  <div class="cards-grid" id="cards-grid">
-    <!-- populated by JS -->
-  </div>
+  <div class="cards-grid" id="cards-grid"></div>
 </main>
 
-<footer>
-  <p>SESI — Serviço Social da Indústria &nbsp;·&nbsp; Feito com ♥</p>
-</footer>
+<footer><p>SESI — Serviço Social da Indústria &nbsp;·&nbsp; Feito com ♥</p></footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script>
-  function loadEntries() {
-    try { return JSON.parse(localStorage.getItem('qr-maes') || '[]'); }
-    catch(e) { return []; }
-  }
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp }                   from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getFirestore, collection, query, orderBy, onSnapshot }
+                                             from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
-  function render() {
-    const entries = loadEntries();
+  // ══════════════════════════════════════════════════
+  //  COLE AQUI SUA CONFIG DO FIREBASE
+  //  (mesma config do arquivo index.html)
+  // ══════════════════════════════════════════════════
+  const firebaseConfig = {
+    apiKey:            "AIzaSyBPPakCZbA6yV7Pk0pqzOE8-l8YKREWfsA",
+    authDomain:        "gerar-qrcode-675c4.firebaseapp.com",
+    projectId:         "gerar-qrcode-675c4",
+    storageBucket:     "gerar-qrcode-675c4.firebasestorage.app",
+    messagingSenderId: "1015193087693",
+    appId:             "1:1015193087693:web:9b34f363314b109fdf0384"
+  };
+  // ══════════════════════════════════════════════════
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+  const col = collection(db, 'homenagens');
+  const statusBar = document.getElementById('status-bar');
+
+  const q = query(col, orderBy('criadoEm', 'asc'));
+  onSnapshot(q, (snapshot) => {
+    const entries = snapshot.docs.map(d => ({ firestoreId: d.id, ...d.data() }));
+    statusBar.className = 'ok';
+    statusBar.textContent = '✓ Ao vivo — ' + entries.length + ' homenagem(ns)';
+    render(entries);
+  }, (err) => {
+    statusBar.className = 'err';
+    statusBar.textContent = '✗ Erro: ' + err.message;
+  });
+
+  function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function render(entries) {
     const grid = document.getElementById('cards-grid');
     grid.innerHTML = '';
-
     if (entries.length === 0) {
-      grid.innerHTML =
-        '<div class="empty-state">' +
-          '<span class="empty-icon">🌸</span>' +
-          '<p>Nenhuma homenagem cadastrada ainda.</p>' +
-          '<small>Abra a página de criação no mesmo navegador para adicionar os vídeos.</small>' +
-        '</div>';
+      grid.innerHTML = '<div class="empty-state"><span class="empty-icon">🌸</span><p>Nenhuma homenagem cadastrada ainda.</p><small>Os QR Codes aparecerão aqui assim que forem adicionados.</small></div>';
       return;
     }
-
-    entries.forEach(function(e, i) {
+    entries.forEach((e, i) => {
+      const safeId = 'qr-v-' + e.firestoreId.replace(/[^a-zA-Z0-9]/g,'_');
       const card = document.createElement('div');
       card.className = 'qr-card';
       card.innerHTML =
-        '<span class="card-number">N.º ' + String(i + 1).padStart(2, '0') + '</span>' +
-        '<div class="qr-wrap" id="qr-' + e.id + '"></div>' +
+        '<span class="card-number">N.º ' + String(i+1).padStart(2,'0') + '</span>' +
+        '<div class="qr-wrap" id="' + safeId + '"></div>' +
         '<div class="card-name">' + esc(e.name) + '</div>' +
-        '<div class="card-cta">Escaneie o QR Code ↑</div>';
+        '<div class="card-cta">Escaneie o QR Code &#x2191;</div>';
       grid.appendChild(card);
-
-      new QRCode(document.getElementById('qr-' + e.id), {
-        text: e.url,
-        width: 150,
-        height: 150,
-        colorDark: '#1a3a6e',
-        colorLight: '#fdf8f2',
-        correctLevel: QRCode.CorrectLevel.H
-      });
+      setTimeout(() => {
+        const el = document.getElementById(safeId);
+        if (el) new QRCode(el, { text: e.url, width:150, height:150, colorDark:'#1a3a6e', colorLight:'#fdf8f2', correctLevel:QRCode.CorrectLevel.H });
+      }, 50);
     });
   }
-
-  function esc(s) {
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  }
-
-  document.addEventListener('DOMContentLoaded', render);
-
-  // Atualiza automaticamente se a aba de criação alterar os dados
-  window.addEventListener('storage', function(e) {
-    if (e.key === 'qr-maes') render();
-  });
 </script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </body>
 </html>
